@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#04d9d9"
+    tools:context="vn.com.wespeak.wespeak.LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="68dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:text="We Speak" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:text="Learner"
+        android:id="@+id/bt_learner"
+        android:textAllCaps="false"
+        android:textColor="#04d9d9"
+        android:textSize="20sp"
+        android:layout_above="@+id/bt_native_speaker"
+        android:background="@drawable/bg_login_native_speaker"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:text="Native Speaker"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:id="@+id/bt_native_speaker"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/bg_login_leaning" />
+
+</RelativeLayout>

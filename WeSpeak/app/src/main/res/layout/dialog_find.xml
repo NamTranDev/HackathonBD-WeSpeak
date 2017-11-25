@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_transparent_80">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_dismiss"
+            android:text="tap to stop"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"
+            android:textSize="12sp"/>
+
+        <vn.com.wespeak.wespeak.ProgressWheel
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            android:id="@+id/pw_spinner"
+            android:layout_gravity="center"
+            ProgressWheel:pwText="Finding"
+            ProgressWheel:pwTextColor="@color/white"
+            ProgressWheel:pwTextSize="40sp"
+            ProgressWheel:pwRimColor="#b1b3b3"
+            ProgressWheel:pwBarLength="30dp"
+            ProgressWheel:pwBarColor="#04d9d9"
+            ProgressWheel:pwBarWidth="3dp"
+            ProgressWheel:pwRimWidth="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="We are connecting you with a partner"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+</RelativeLayout>
