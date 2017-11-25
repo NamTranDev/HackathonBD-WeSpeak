@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_history_item"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_margin="25dp"
+        android:layout_gravity="center_vertical">
+
+        <vn.com.wespeak.wespeak.ShapedImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/iv_user"
+            android:scaleType="centerCrop"
+            app:shape_mode="circle"
+            app:srcCompat="@drawable/namtran"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:id="@+id/iv_national_flag"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:srcCompat="@drawable/vietnam_national_flag"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nam Tran"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/tv_user"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+</LinearLayout>

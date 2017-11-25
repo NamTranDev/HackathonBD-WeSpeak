@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:id="@+id/subscriber_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/contain_interact"
+        android:visibility="gone"
+        android:padding="10dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/iv_end_call"
+            app:srcCompat="@drawable/icon_end_call"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_user_partner"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:text="Lisa"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_timer"
+                android:layout_marginTop="2.5dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                tools:text="12:30"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/iv_unvideo"
+            app:srcCompat="@drawable/icon_unvideo"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/iv_mute"
+            android:layout_marginStart="15dp"
+            app:srcCompat="@drawable/icon_mute"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/publisher_container"
+        android:layout_width="@dimen/publisher_width"
+        android:layout_height="@dimen/publisher_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/publisher_bottom_margin"
+        android:layout_marginEnd="@dimen/publisher_right_margin"
+        android:layout_marginRight="@dimen/publisher_end_margin"
+        android:background="@color/white"
+        android:padding="@dimen/publisher_padding" />
+
+</RelativeLayout>
