@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -14,9 +14,24 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="Dialog">
+    <style name="DialogFade">
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
         <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="Dialog">
+        <item name="android:windowEnterAnimation">@anim/fade_in_250</item>
+        <item name="android:windowExitAnimation">@anim/fade_out_250</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#8E8E8E</item>
+        <item name="colorControlActivated">#F8F78C</item>
+    </style>
+
+    <style name="LoadingTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 
 </resources>

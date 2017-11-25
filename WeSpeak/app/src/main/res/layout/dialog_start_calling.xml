@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:background="@drawable/bg_dialog_calling"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your partner"/>
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <vn.com.wespeak.wespeak.ShapedImageView
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:id="@+id/iv_partner"
+            android:scaleType="centerCrop"
+            app:shape_mode="circle"
+            app:srcCompat="@drawable/namtran"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:id="@+id/iv_national_flag"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:srcCompat="@drawable/vietnam_national_flag"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nam Tran"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_partner"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Start"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:id="@+id/bt_start"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_button_start_calling" />
+
+</LinearLayout>

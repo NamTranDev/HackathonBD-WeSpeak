@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/WeSpeak.iml" filepath="$PROJECT_DIR$/WeSpeak.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/wespeak-hackathon-pharse1.iml" filepath="$PROJECT_DIR$/wespeak-hackathon-pharse1.iml" />
     </modules>
   </component>
 </project>
