@@ -28,6 +28,7 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.CallingActivity" />
         <activity android:name=".activity.RatingActivity" />
+        <activity android:name=".activity.ConversationActivity" />
     </application>
 
 </manifest>

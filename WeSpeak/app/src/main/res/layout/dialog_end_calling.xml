@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="40dp"
+        android:padding="25dp"
         android:id="@+id/contain_layout"
         android:layout_centerInParent="true"
         android:background="@drawable/bg_dialog_calling"
@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Are you sure  you want to finish this conversatoin"
-            android:textColor="#A8AAAA"
+            android:textStyle="bold"
+            android:text="@string/finish_this_conversation"
             android:textSize="15sp"/>
 
         <Button
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/contain_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:id="@+id/tv_dismiss"
         android:textSize="15sp"
         android:textColor="@color/white"

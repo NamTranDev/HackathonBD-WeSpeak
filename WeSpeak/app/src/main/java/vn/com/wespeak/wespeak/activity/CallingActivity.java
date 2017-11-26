@@ -2,6 +2,7 @@ package vn.com.wespeak.wespeak.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -32,7 +34,6 @@ import vn.com.wespeak.wespeak.Constant;
 import vn.com.wespeak.wespeak.Logger;
 import vn.com.wespeak.wespeak.R;
 import vn.com.wespeak.wespeak.StatusBarUtil;
-import vn.com.wespeak.wespeak.Utils;
 import vn.com.wespeak.wespeak.dialog.DialogEndCalling;
 import vn.com.wespeak.wespeak.dialog.DialogStartCalling;
 import vn.com.wespeak.wespeak.model.User;
@@ -55,26 +56,30 @@ public class CallingActivity extends AppCompatActivity implements Session.Sessio
     ProgressBar mProgress;
     @BindView(R.id.contain_interact)
     LinearLayout mContainInteract;
+    @BindView(R.id.iv_unvideo)
+    AppCompatImageView mIvUnVideo;
+    @BindView(R.id.iv_mute)
+    AppCompatImageView mIvMute;
 
     private Session mSession;
     private Subscriber mSubscriber;
 
     private PermissionHelper mPermission;
-    private long start;
+//    private long start;
     private User userAnother;
     private int type;
     private String convesationId;
-    private Handler timer = new Handler();
-    private Runnable timerRunable = new Runnable() {
-        @Override
-        public void run() {
-            if (mTvTimer != null) {
-                long result = System.currentTimeMillis() - start;
-                mTvTimer.setText(Utils.makeShortTimeString(CallingActivity.this, result));
-            }
-        }
-    };
-    private boolean isStart;
+//    private Handler timer = new Handler();
+//    private Runnable timerRunable = new Runnable() {
+//        @Override
+//        public void run() {
+//            if (mTvTimer != null) {
+//                long result = System.currentTimeMillis() - start;
+//                mTvTimer.setText(Utils.makeShortTimeString(CallingActivity.this, result));
+//            }
+//        }
+//    };
+//    private boolean isStart;
 
 
     @Override
@@ -82,7 +87,7 @@ public class CallingActivity extends AppCompatActivity implements Session.Sessio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calling);
         ButterKnife.bind(this);
-        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.black));
+        StatusBarUtil.setColorNoTranslucent(this, Color.parseColor("#D6D6D6"));
 
         mPermission = new PermissionHelper(this);
     }
@@ -118,6 +123,7 @@ public class CallingActivity extends AppCompatActivity implements Session.Sessio
             convesationId = getIntent().getExtras().getString(Constant.EXTRA.CONVERSATION_ID);
             //display dialog
             if (userMain != null && userAnother != null) {
+                mTvUserPartner.setText(userAnother.name);
                 if (type != Constant.CallType.RECEIVER) {
                     DialogStartCalling dialogStartCalling = DialogStartCalling.getInstance(userAnother);
                     dialogStartCalling.setOnDialogStartCallingCallBack(this);
@@ -146,8 +152,8 @@ public class CallingActivity extends AppCompatActivity implements Session.Sessio
             mSession.onPause();
         }
 
-        if (isStart)
-            timer.removeCallbacks(timerRunable);
+//        if (isStart)
+//            timer.removeCallbacks(timerRunable);
     }
 
     @Override
@@ -161,9 +167,9 @@ public class CallingActivity extends AppCompatActivity implements Session.Sessio
             mSession.onResume();
         }
 
-        if (isStart) {
-            timer.postDelayed(timerRunable, 1000);
-        }
+//        if (isStart) {
+//            timer.postDelayed(timerRunable, 1000);
+//        }
     }
 
     private void initializeSession(String apiKey, String sessionId, String token) {
@@ -216,10 +222,9 @@ public class CallingActivity extends AppCompatActivity implements Session.Sessio
             mSession.subscribe(mSubscriber);
             mSubscriberContainer.addView(mSubscriber.getView());
         }
-        start = System.currentTimeMillis();
-        isStart = true;
-        timer.post(timerRunable);
-        mContainInteract.setVisibility(View.VISIBLE);
+//        start = System.currentTimeMillis();
+//        isStart = true;
+//        timer.post(timerRunable);
     }
 
     @Override
@@ -315,18 +320,24 @@ public class CallingActivity extends AppCompatActivity implements Session.Sessio
                 break;
             case R.id.iv_unvideo:
                 if (mSubscriber != null) {
-                    if (mSubscriber.getSubscribeToVideo())
+                    if (mSubscriber.getSubscribeToVideo()){
                         mSubscriber.setSubscribeToVideo(false);
-                    else
+                        mIvUnVideo.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_unvideo));
+                    } else{
                         mSubscriber.setSubscribeToVideo(true);
+                        mIvUnVideo.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_video));
+                    }
                 }
                 break;
             case R.id.iv_mute:
                 if (mSubscriber != null) {
-                    if (mSubscriber.getSubscribeToAudio())
+                    if (mSubscriber.getSubscribeToAudio()){
                         mSubscriber.setSubscribeToAudio(false);
-                    else
+                        mIvMute.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_mute));
+                    } else{
                         mSubscriber.setSubscribeToAudio(true);
+                        mIvMute.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.icon_mic));
+                    }
                 }
                 break;
         }
@@ -353,8 +364,9 @@ public class CallingActivity extends AppCompatActivity implements Session.Sessio
     private void goToRating() {
         Intent ratingActivity = new Intent(CallingActivity.this, RatingActivity.class);
         if (userAnother != null){
-            ratingActivity.putExtra(Constant.EXTRA.USER_RATING_TYPE,type);
+            ratingActivity.putExtra(Constant.EXTRA.USER_RATING_TYPE,userAnother.id);
             ratingActivity.putExtra(Constant.EXTRA.USER_RATING,userAnother.rating);
+            ratingActivity.putExtra(Constant.EXTRA.USER_URL,userAnother.url);
             ratingActivity.putExtra(Constant.EXTRA.CONVERSATION_ID_RATING,convesationId);
         }
 

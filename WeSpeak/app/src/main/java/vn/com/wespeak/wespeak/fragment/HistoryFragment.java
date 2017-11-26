@@ -1,6 +1,7 @@
 package vn.com.wespeak.wespeak.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,11 +18,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import vn.com.wespeak.wespeak.Constant;
 import vn.com.wespeak.wespeak.R;
+import vn.com.wespeak.wespeak.activity.ConversationActivity;
 import vn.com.wespeak.wespeak.adapter.HistoryAdapter;
 import vn.com.wespeak.wespeak.model.User;
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements HistoryAdapter.OnItemClick {
 
     @BindView(R.id.rv_history)
     RecyclerView mRvHistory;
@@ -48,6 +51,7 @@ public class HistoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mRvHistory.setLayoutManager(new LinearLayoutManager(getThis()));
         mHistoryAdapter = new HistoryAdapter(new ArrayList<>());
+        mHistoryAdapter.setOnItemClick(this);
         mRvHistory.setAdapter(mHistoryAdapter);
     }
 
@@ -70,5 +74,12 @@ public class HistoryFragment extends Fragment {
             }
         }
 
+    }
+
+    @Override
+    public void onItemClick(User user) {
+        Intent intent = new Intent(getThis(),ConversationActivity.class);
+        intent.putExtra(Constant.EXTRA.USER_CONVERSATION,user);
+        getThis().startActivity(intent);
     }
 }

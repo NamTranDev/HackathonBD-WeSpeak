@@ -83,7 +83,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Conversation"
+                        android:text="Conversations"
                         android:textColor="#A8AAAA"
                         android:textStyle="bold"
                         android:textSize="15sp"/>
@@ -140,11 +140,11 @@
             <android.support.v7.widget.AppCompatRatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:numStars="5"
-                android:rating="3.5"
                 android:id="@+id/rating"
                 android:layout_gravity="center"
-                android:isIndicator="true"/>
+                android:theme="@style/RatingBar"
+                android:isIndicator="true"
+                android:numStars="5" />
 
             <TextView
                 android:layout_width="wrap_content"

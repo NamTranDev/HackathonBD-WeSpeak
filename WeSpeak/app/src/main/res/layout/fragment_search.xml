@@ -15,18 +15,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="tap to stop"
-                android:padding="10dp"
-                android:layout_marginBottom="3dp"
-                android:visibility="invisible"
-                android:textSize="12sp"/>
 
             <Button
                 android:layout_width="225dp"
@@ -44,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Let find an English speaking partner"
+                android:id="@+id/tv_find"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:textSize="20sp"/>

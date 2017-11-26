@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Logger.debug("conversation");
                 listConversation.clear();
-                for (DataSnapshot child : dataSnapshot.getChildren()){
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Converstation converstation = child.getValue(Converstation.class);
                     if (converstation != null)
                         listConversation.add(converstation);
@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
             }
         });
 
-        if (getIntent().getExtras() != null){
+        if (getIntent().getExtras() != null) {
             user = getIntent().getExtras().getParcelable(Constant.EXTRA.USER_LOGIN);
-            setupViewPager(mViewpager,user);
+            setupViewPager(mViewpager, user);
             mTab.setupWithViewPager(mViewpager);
             setupTabIcons();
             mViewpager.post(() -> {
@@ -107,15 +107,15 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                if (user != null){
+                if (user != null) {
                     Fragment profileFragment = listFragment.get(Constant.POSITION.PROFILE);
-                    if (profileFragment != null && profileFragment instanceof ProfileFragment){
-                        ((ProfileFragment)profileFragment).initData(user);
+                    if (profileFragment != null && profileFragment instanceof ProfileFragment) {
+                        ((ProfileFragment) profileFragment).initData(user);
                     }
 
-                    if (!TextUtils.isEmpty(user.conversationId) && !isPress && listUser.size() > 0){
+                    if (!TextUtils.isEmpty(user.conversationId) && !isPress && listUser.size() > 0) {
                         User receiverUser = null;
-                        switch (user.id){
+                        switch (user.id) {
                             case Constant.TypeLogin.LEANER:
                                 receiverUser = getUser(Constant.TypeLogin.TEACHER);
                                 break;
@@ -123,13 +123,13 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
                                 receiverUser = getUser(Constant.TypeLogin.LEANER);
                                 break;
                         }
-                        if (receiverUser != null){
+                        if (receiverUser != null) {
                             try {
                                 receiverUser.conversationId = user.conversationId;
                                 DialogStartCalling dialogStartCalling = DialogStartCalling.getInstance(receiverUser);
                                 dialogStartCalling.setOnDialogStartCallingCallBack(MainActivity.this);
                                 dialogStartCalling.show(getSupportFragmentManager(), "Calling Dialog Start");
-                            }catch (IllegalStateException e){
+                            } catch (IllegalStateException e) {
                                 Logger.debug(e);
                             }
                         }
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 listUser.clear();
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     User user = postSnapshot.getValue(User.class);
                     if (user != null)
                         listUser.add(user);
@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
         });
     }
 
-    private User getUser(int id){
-        for (User user: listUser) {
+    private User getUser(int id) {
+        for (User user : listUser) {
             if (user.id == id)
                 return user;
         }
@@ -172,48 +172,58 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
     }
 
     private void updateConverStation() {
-        if (listConversation.size() > 0 && user != null){
-            switch (user.id){
+        if (listConversation.size() > 0 && listUser.size() > 0 && user != null) {
+            switch (user.id) {
                 case Constant.TypeLogin.LEANER:
                     List<Integer> listLeaner = new ArrayList<>();
-                    for (Converstation converstation : listConversation){
-                        if (converstation.learnerId == 1){
+                    for (Converstation converstation : listConversation) {
+                        if (converstation.learnerId == 1) {
                             listLeaner.add(converstation.teacherId);
                         }
                     }
 
                     List<User> userTeacher = new ArrayList<>();
-                    for (User user : listUser){
-                        if (listLeaner.contains(user.id)){
+                    for (User user : listUser) {
+                        if (listLeaner.contains(user.id)) {
                             userTeacher.add(user);
                         }
                     }
 
-                    if (userTeacher.size() > 0){
+                    if (userTeacher.size() > 0) {
                         Fragment historyFragment = listFragment.get(Constant.POSITION.CONVERSTATION);
                         if (historyFragment != null && historyFragment instanceof HistoryFragment)
-                            ((HistoryFragment)historyFragment).initData(userTeacher);
+                            ((HistoryFragment) historyFragment).initData(userTeacher);
+
+                        Fragment fragmentProfile = listFragment.get(Constant.POSITION.PROFILE);
+                        if (fragmentProfile != null && fragmentProfile instanceof ProfileFragment){
+                            ((ProfileFragment)fragmentProfile).updateConversation(userTeacher.size());
+                        }
                     }
                     break;
                 case Constant.TypeLogin.TEACHER:
                     List<Integer> listTeacher = new ArrayList<>();
-                    for (Converstation converstation : listConversation){
-                        if (converstation.learnerId == 1){
-                            listTeacher.add(converstation.teacherId);
+                    for (Converstation converstation : listConversation) {
+                        if (converstation.teacherId == 2) {
+                            listTeacher.add(converstation.learnerId);
                         }
                     }
 
                     List<User> userLeaner = new ArrayList<>();
-                    for (User user : listUser){
-                        if (listTeacher.contains(user.id)){
+                    for (User user : listUser) {
+                        if (listTeacher.contains(user.id)) {
                             userLeaner.add(user);
                         }
                     }
 
-                    if (userLeaner.size() > 0){
+                    if (userLeaner.size() > 0) {
                         Fragment historyFragment = listFragment.get(Constant.POSITION.CONVERSTATION);
                         if (historyFragment != null && historyFragment instanceof HistoryFragment)
-                            ((HistoryFragment)historyFragment).initData(userLeaner);
+                            ((HistoryFragment) historyFragment).initData(userLeaner);
+
+                        Fragment fragmentProfile = listFragment.get(Constant.POSITION.PROFILE);
+                        if (fragmentProfile != null && fragmentProfile instanceof ProfileFragment){
+                            ((ProfileFragment)fragmentProfile).updateConversation(userLeaner.size());
+                        }
                     }
                     break;
             }
@@ -227,13 +237,13 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
         }
     }
 
-    private void setupViewPager(ViewPager viewPager,User user) {
-        SearchFragment searchFragment = SearchFragment.getInstance();
+    private void setupViewPager(ViewPager viewPager, User user) {
+        SearchFragment searchFragment = SearchFragment.getInstance(user.id);
         searchFragment.setmOnSearchListener(this);
-        listFragment.add(Constant.POSITION.SEARCH,searchFragment);
-        listFragment.add(Constant.POSITION.CONVERSTATION,HistoryFragment.getInstance());
-        listFragment.add(Constant.POSITION.PROFILE,ProfileFragment.getInstance(user));
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),listFragment);
+        listFragment.add(Constant.POSITION.SEARCH, searchFragment);
+        listFragment.add(Constant.POSITION.CONVERSTATION, HistoryFragment.getInstance());
+        listFragment.add(Constant.POSITION.PROFILE, ProfileFragment.getInstance(user));
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), listFragment);
         viewPager.setAdapter(adapter);
         mViewpager.setOffscreenPageLimit(3);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -254,15 +264,15 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
                     case 2:
                         setTextTitle("Profile");
                         break;
-                    }
                 }
+            }
 
-                @Override
-                public void onPageScrollStateChanged ( int state){
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
-                }
-            });
-        }
+            }
+        });
+    }
 
     private void setupTabIcons() {
         TabLayout.Tab tab1 = mTab.getTabAt(0);
@@ -292,10 +302,10 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
     public void onFind() {
         int random = new Random().nextInt();
         String conversationId = String.valueOf(random);
-        if (user != null){
+        if (user != null) {
             User userReceiver = null;
             isPress = true;
-            switch (user.id){
+            switch (user.id) {
                 case Constant.TypeLogin.LEANER:
                     mDatabase.child("user").child(String.valueOf(Constant.TypeLogin.TEACHER)).child("conversationId").setValue(conversationId);
                     userReceiver = getUser(Constant.TypeLogin.TEACHER);
@@ -306,36 +316,36 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
                     break;
             }
 
-            if (userReceiver != null && this.user != null){
-                getToCalling(userReceiver,user,Constant.CallType.CALLING,conversationId);
+            if (userReceiver != null && this.user != null) {
+                getToCalling(userReceiver, user, Constant.CallType.CALLING, conversationId);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         }
     }
 
     @Override
-    public void onDialogStartListener(DialogStartCalling dialog,User userReceiver) {
+    public void onDialogStartListener(DialogStartCalling dialog, User userReceiver) {
         if (dialog != null)
             dialog.dismiss();
 
-        if (user != null && userReceiver != null){
-            getToCalling(userReceiver,user,Constant.CallType.RECEIVER,userReceiver.conversationId);
+        if (user != null && userReceiver != null) {
+            getToCalling(userReceiver, user, Constant.CallType.RECEIVER, userReceiver.conversationId);
         }
     }
 
-    private void getToCalling(User userReceiver, User main,int type,String conversationId) {
-        Intent intent = new Intent(this,CallingActivity.class);
-        intent.putExtra(Constant.EXTRA.USER_ANOTHER,userReceiver);
-        intent.putExtra(Constant.EXTRA.USER_MAIN,main.token);
-        intent.putExtra(Constant.EXTRA.CALL_TYPE,type);
-        intent.putExtra(Constant.EXTRA.CONVERSATION_ID,conversationId);
+    private void getToCalling(User userReceiver, User main, int type, String conversationId) {
+        Intent intent = new Intent(this, CallingActivity.class);
+        intent.putExtra(Constant.EXTRA.USER_ANOTHER, userReceiver);
+        intent.putExtra(Constant.EXTRA.USER_MAIN, main.token);
+        intent.putExtra(Constant.EXTRA.CALL_TYPE, type);
+        intent.putExtra(Constant.EXTRA.CONVERSATION_ID, conversationId);
         startActivity(intent);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private List<Fragment> mFragmentList;
 
-        ViewPagerAdapter(FragmentManager manager,List<Fragment> mFragmentList) {
+        ViewPagerAdapter(FragmentManager manager, List<Fragment> mFragmentList) {
             super(manager);
             this.mFragmentList = mFragmentList;
         }
@@ -354,5 +364,11 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
         public CharSequence getPageTitle(int position) {
             return null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

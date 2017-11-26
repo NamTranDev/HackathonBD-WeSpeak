@@ -11,6 +11,7 @@ public class User implements Parcelable{
     public String name;
     public float rating;
     public String token;
+    public String url;
 
     public User() {
     }
@@ -22,6 +23,7 @@ public class User implements Parcelable{
         name = in.readString();
         rating = in.readFloat();
         token = in.readString();
+        url = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -49,6 +51,7 @@ public class User implements Parcelable{
         parcel.writeString(name);
         parcel.writeFloat(rating);
         parcel.writeString(token);
+        parcel.writeString(url);
     }
 
     @Override
@@ -60,6 +63,7 @@ public class User implements Parcelable{
                 ", name='" + name + '\'' +
                 ", rating=" + rating +
                 ", token='" + token + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

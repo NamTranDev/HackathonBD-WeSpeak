@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +41,8 @@ public class DialogStartCalling extends DialogFragment {
     AppCompatImageView mIvNationalFlag;
     @BindView(R.id.tv_partner)
     TextView mTvPartner;
+    @BindView(R.id.tv_user)
+    TextView mTvUser;
     Unbinder unbinder;
 
     private onDialogStartCallingCallBack onDialogStartCallingCallBack;
@@ -82,6 +87,17 @@ public class DialogStartCalling extends DialogFragment {
         if (getArguments() != null){
             user = getArguments().getParcelable(Constant.EXTRA.DIALOG_START_CALLING);
             if (user != null){
+                switch (user.id){
+                    case Constant.TypeLogin.LEANER:
+                        mTvUser.setText(getThis().getString(R.string.start_learner));
+                        break;
+                    case Constant.TypeLogin.TEACHER:
+                        mTvUser.setText(getThis().getString(R.string.start_teacher));
+                        break;
+                }
+                if (!TextUtils.isEmpty(user.url)){
+                    Picasso.with(getContext()).load(user.url).placeholder(R.drawable.image_holder).error(R.drawable.image_holder).into(mIvPartner);
+                }
                 mTvPartner.setText(user.name);
                 if (user.country.equals("VN")){
                     mIvNationalFlag.setImageDrawable(ContextCompat.getDrawable(getThis(),R.drawable.vietnam_national_flag));

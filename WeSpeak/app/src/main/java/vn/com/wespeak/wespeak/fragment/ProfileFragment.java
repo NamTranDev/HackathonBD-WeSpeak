@@ -12,11 +12,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatRatingBar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,6 +79,9 @@ public class ProfileFragment extends Fragment {
             }else {
                 mIvNationalFlag.setImageDrawable(ContextCompat.getDrawable(getThis(),R.drawable.usa_national_flag));
             }
+            if (!TextUtils.isEmpty(user.url)){
+                Picasso.with(getThis()).load(user.url).placeholder(R.drawable.image_holder).error(R.drawable.image_holder).into(mIvUser);
+            }
         }
     }
 
@@ -87,5 +93,10 @@ public class ProfileFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public void updateConversation(int size) {
+        if (getView() != null)
+            mTvConversation.setText(String.valueOf(size));
     }
 }
