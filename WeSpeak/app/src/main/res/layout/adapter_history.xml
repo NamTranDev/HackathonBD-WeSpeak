@@ -30,13 +30,29 @@
             app:srcCompat="@drawable/vietnam_national_flag"/>
     </RelativeLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nam Tran"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/tv_user"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nam Tran"
+            android:id="@+id/tv_user"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/ratingBarStyleSmall"
+            android:theme="@style/RatingBar"
+            android:stepSize="0.1"
+            android:numStars="5"
+            android:id="@+id/rating"
+            android:isIndicator="true"/>
+    </LinearLayout>
 </LinearLayout>

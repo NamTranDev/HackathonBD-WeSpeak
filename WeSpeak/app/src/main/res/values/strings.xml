@@ -16,5 +16,14 @@
     <!-- Player -->
     <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
     <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
+    <string name="find_teacher">Let help learner practice English speaking</string>
+    <string name="find_teacher_dialog">We are connecting you with a student</string>
+    <string name="find_learner">Let find a native speaker</string>
+    <string name="find_learner_dialog">We are connnecting you with a native</string>
+    <string name="finish_this_conversation">Are you sure you want to finish this conversation</string>
+    <string name="rating_leaner">How was your student?</string>
+    <string name="rating_teacher">How was your teacher?</string>
+    <string name="start_teacher">Your teacher</string>
+    <string name="start_learner">Your student</string>
 
 </resources>

@@ -13,18 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import vn.com.wespeak.wespeak.Constant;
 import vn.com.wespeak.wespeak.ProgressWheel;
 import vn.com.wespeak.wespeak.R;
+import vn.com.wespeak.wespeak.fragment.SearchFragment;
 
 public class DialogFind extends DialogFragment {
 
     @BindView(R.id.pw_spinner)
     ProgressWheel mPwSpinner;
+    @BindView(R.id.tv_find)
+    TextView mTvFind;
 
     private Unbinder unbinder;
 
@@ -38,13 +43,18 @@ public class DialogFind extends DialogFragment {
             if (mDialogDismissListener != null){
                 mDialogDismissListener.onFind();
                 mDialogDismissListener.onDismiss();
+                dismiss();
             }
 
         }
     };
 
-    public static DialogFind getInstance() {
-        return new DialogFind();
+    public static DialogFind getInstance(int type) {
+        DialogFind dialogFind = new DialogFind();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.EXTRA.DIALOG_FIND_TYPE,type);
+        dialogFind.setArguments(bundle);
+        return dialogFind;
     }
 
     @NonNull
@@ -76,6 +86,17 @@ public class DialogFind extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_find, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getArguments() != null){
+            int type = getArguments().getInt(Constant.EXTRA.DIALOG_FIND_TYPE);
+            switch (type){
+                case Constant.TypeLogin.LEANER:
+                    mTvFind.setText(this.getString(R.string.find_learner_dialog));
+                    break;
+                case Constant.TypeLogin.TEACHER:
+                    mTvFind.setText(this.getString(R.string.find_teacher_dialog));
+                    break;
+            }
+        }
         return view;
     }
 
@@ -86,7 +107,7 @@ public class DialogFind extends DialogFragment {
         mPwSpinner.setDelayMillis(5);
         mPwSpinner.startSpinning();
 
-        handler.postDelayed(runnable, 2000);
+        handler.postDelayed(runnable, 4000);
     }
 
     @Override
@@ -117,7 +138,7 @@ public class DialogFind extends DialogFragment {
         runnable = null;
     }
 
-    @OnClick(R.id.tv_dismiss)
+    @OnClick({R.id.contain_dismiss})
     public void onViewClicked() {
         if (mDialogDismissListener != null)
             mDialogDismissListener.onDismiss();

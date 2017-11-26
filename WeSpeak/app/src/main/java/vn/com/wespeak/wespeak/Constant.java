@@ -15,6 +15,10 @@ public interface Constant {
         String CONVERSATION_ID = "Conversation id";
         String CONVERSATION_ID_RATING = "Conversation id rating";
         String USER_RATING = "User Rating";
+        String USER_CONVERSATION = "User conversation";
+        String SEARCH_TYPE = "Search type";
+        String DIALOG_FIND_TYPE = "Dialog find type";
+        String USER_URL = "User url";
     }
 
     interface TypeLogin {
