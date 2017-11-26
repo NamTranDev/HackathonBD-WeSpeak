@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "576380390845",
+    "firebase_url": "https://bdhackathon-385ae.firebaseio.com",
+    "project_id": "bdhackathon-385ae",
+    "storage_bucket": "bdhackathon-385ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576380390845:android:0fc748e3fdb0e784",
+        "android_client_info": {
+          "package_name": "vn.com.wespeak.wespeak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576380390845-ur53vfko9lpc6rtt10hclah3ea6v7j45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-bR2-Kr51nhc3_B_mKPCXQd_i1y8wn4g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
