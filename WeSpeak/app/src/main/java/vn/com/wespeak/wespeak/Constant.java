@@ -36,4 +36,9 @@ public interface Constant {
         int CALLING = 1;
         int RECEIVER = 2;
     }
+
+    interface MESSAGE{
+        int RECEIVER = 1;
+        int SEND = 2;
+    }
 }

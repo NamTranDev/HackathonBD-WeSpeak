@@ -11,6 +11,11 @@ public class Converstation implements Parcelable{
     public Converstation() {
     }
 
+    public Converstation(int learnerId, int teacherId) {
+        this.learnerId = learnerId;
+        this.teacherId = teacherId;
+    }
+
     protected Converstation(Parcel in) {
         learnerId = in.readInt();
         teacherId = in.readInt();

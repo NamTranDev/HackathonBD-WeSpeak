@@ -309,10 +309,14 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
                 case Constant.TypeLogin.LEANER:
                     mDatabase.child("user").child(String.valueOf(Constant.TypeLogin.TEACHER)).child("conversationId").setValue(conversationId);
                     userReceiver = getUser(Constant.TypeLogin.TEACHER);
+                    assert userReceiver != null;
+                    mDatabase.child("conversation").push().setValue(new Converstation(user.id,userReceiver.id));
                     break;
                 case Constant.TypeLogin.TEACHER:
                     mDatabase.child("user").child(String.valueOf(Constant.TypeLogin.LEANER)).child("conversationId").setValue(conversationId);
                     userReceiver = getUser(Constant.TypeLogin.LEANER);
+                    assert userReceiver != null;
+                    mDatabase.child("conversation").push().setValue(new Converstation(userReceiver.id,user.id));
                     break;
             }
 
