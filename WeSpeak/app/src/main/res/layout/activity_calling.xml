@@ -11,6 +11,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/contain_drawer"
         android:background="#D6D6D6">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -86,10 +87,9 @@
                 android:layout_width="@dimen/publisher_width"
                 android:layout_height="@dimen/publisher_height"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginBottom="@dimen/publisher_bottom_margin"
-                android:layout_marginEnd="@dimen/publisher_right_margin"
-                android:layout_marginRight="@dimen/publisher_end_margin"
+                android:layout_marginStart="@dimen/publisher_end_margin"
                 android:background="@color/white"
                 android:padding="@dimen/publisher_padding" />
 
@@ -102,16 +102,40 @@
             android:layout_gravity="end"
             android:layout_marginStart="-64dp">
 
-            <EditText
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="110dp"
-                android:layout_marginStart="5dp"
-                android:hint="Input"
-                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="75dp"
+                android:layout_marginStart="110dp"
+                android:id="@+id/rv_message"
+                android:layout_above="@+id/contain_input"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:orientation="horizontal"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/bg_input_chat"
-                android:textColor="@color/black"/>
+                android:visibility="visible"
+                android:id="@+id/contain_input">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:hint="Input"
+                    android:padding="5dp"
+                    android:id="@+id/edt_input"
+                    android:background="@drawable/bg_input_chat"
+                    android:textColor="@color/black"/>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:scaleType="center"
+                    android:id="@+id/bt_send_message"
+                    app:srcCompat="@drawable/send_button" />
+            </LinearLayout>
         </RelativeLayout>
     </android.support.v4.widget.DrawerLayout>
 
